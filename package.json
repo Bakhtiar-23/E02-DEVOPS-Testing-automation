@@ -5,7 +5,7 @@
   "main": "workout.js",
   "type": "module",
   "scripts": {
-    "test": "cross-env PORT=3407 node --experimental-vm-modules node_modules/jest/bin/jest Workout.test.js"
+    "test": "cross-env PORT=3407 node --experimental-vm-modules node_modules/jest/bin/jest Workout.test.js --detectOpenHandles"
   },
   "keywords": [],
   "author": "",

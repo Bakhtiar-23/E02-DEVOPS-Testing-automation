@@ -3,7 +3,7 @@ import { createServer } from 'http';
 import app from '../server'; // Import your app from server.js
 import mongoose from 'mongoose';
 import { jest } from '@jest/globals';
-import WorkoutModel from './workout.js';  // Ensure you import WorkoutModel
+import WorkoutModel from './workout.js'; // Import the WorkoutModel directly
 
 let server;
 let PORT;
@@ -52,16 +52,18 @@ afterAll(async () => {
 
 jest.setTimeout(30000); // Increased timeout
 
+// Helper function to get a workout ID by creating a workout
+const getWorkoutId = async () => {
+  const workout = await WorkoutModel.createWorkout('bakhtiar_ismail'); // Username used to create workout
+  return workout._id;
+};
+
 describe('Workout API End-to-End Tests', () => {
   let workoutId;
 
   beforeEach(async () => {
-    // Create a workout entry before each test
-    const workout = await WorkoutModel.create({
-      username: 'bakhtiar_ismail', // You can set the username as needed
-      exercises: [],
-    });
-    workoutId = workout._id;
+    // Use the helper function to create a workout and get its ID before each test
+    workoutId = await getWorkoutId();
     console.log(`Created workout with ID: ${workoutId}`);
   });
 
