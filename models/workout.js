@@ -9,10 +9,10 @@ const WorkoutModel = mongoose.model('Workout', workoutSchema);
 
 // Create a workout
 WorkoutModel.createWorkout = async (username) => {
-  if (username.length < 4) {
+  if (!username || username.length < 4) {
     throw new Error('Username must be at least 4 characters long');
   }
-  
+
   const workout = new WorkoutModel({ username, exercises: [] });
   await workout.save();
   return workout;

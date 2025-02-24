@@ -131,13 +131,30 @@ describe('Workout API End-to-End Tests', () => {
   });
   
   test('should create a workout successfully with a valid username', async () => {
-    const validUsername = 'abcdef'; // Valid username, 8 characters
+    const validUsername = 'abcdef'; // Valid username, 6 characters
   
     // Create workout with a valid username
     const workout = await WorkoutModel.createWorkout(validUsername);
   
     expect(workout.username).toBe(validUsername);
     expect(workout.exercises).toEqual([]);
+  });
+  test('should throw an error if username is missing', async () => {
+    try {
+      // Attempt to create a workout with a missing username (undefined)
+      await WorkoutModel.createWorkout();
+    } catch (error) {
+      console.log('Error:', error.message); // For debugging
+      expect(error.message).toBe('Username must be at least 4 characters long');
+    }
+  });
+  test('should throw an error if username is too short', async () => {
+    try {
+      await WorkoutModel.createWorkout('abc'); // Call with a short username
+    } catch (error) {
+      console.log('Error:', error.message); // For debugging
+      expect(error.message).toBe('Username must be at least 4 characters long');
+    }
   });
   
 });
