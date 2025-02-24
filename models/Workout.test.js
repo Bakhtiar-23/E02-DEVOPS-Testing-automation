@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { createServer } from 'http';
-import app from './server'; // Import your app from server.js
+import app from '../server'; // Import your app from server.js
 import mongoose from 'mongoose';
 import { jest } from '@jest/globals';
+import WorkoutModel from './workout.js';
 
 let server;
 let PORT;
@@ -83,7 +84,7 @@ describe('Workout API End-to-End Tests', () => {
   
 
   test('should remove an exercise from the workout', async () => {
-    const workoutId = '67bb65ab98bd0aa622f6a7c5'; // Use the correct ID
+    const workoutId = '67bcae7577077b5be69e5324'; // Use the correct ID
     const exerciseName = 'Push-up'; // Assuming you're removing this exercise
   
     try {
